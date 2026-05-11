@@ -1,0 +1,5 @@
+# Force LF line endings for Unix files
+* text=auto
+Procfile text eol=lf
+*.py text eol=lf
+requirements.txt text eol=lf
