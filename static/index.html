@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDF to Word Converter — Konversi PDF ke Word Tanpa Mengubah Struktur</title>
+  <meta name="description" content="Konversi file PDF ke format Word (.docx) secara online gratis. Struktur, tabel, gambar, dan format tetap terjaga sempurna." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Animated background particles -->
+  <div class="bg-particles" id="bgParticles"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="36" height="36" rx="10" fill="url(#logoGrad)"/>
+            <path d="M10 8h10l8 8v12a2 2 0 01-2 2H10a2 2 0 01-2-2V10a2 2 0 012-2z" fill="white" fill-opacity="0.9"/>
+            <path d="M20 8l8 8h-6a2 2 0 01-2-2V8z" fill="white" fill-opacity="0.5"/>
+            <path d="M13 20h10M13 24h7" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#6366f1"/>
+                <stop offset="1" stop-color="#8b5cf6"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="logo-text">PDF<span class="logo-accent">2</span>Word</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#features" class="nav-link">Fitur</a>
+        <a href="#how-it-works" class="nav-link">Cara Kerja</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Gratis · Struktur Terjaga · Privasi Aman
+    </div>
+    <h1 class="hero-title">
+      Ubah PDF ke Word<br />
+      <span class="gradient-text">Tanpa Mengubah Struktur</span>
+    </h1>
+    <p class="hero-subtitle">
+      Konversi file PDF ke format .docx dengan teknologi AI canggih.<br />
+      Tabel, gambar, paragraf, dan format asli tetap terjaga sempurna.
+    </p>
+
+    <!-- Upload Card -->
+    <div class="upload-card" id="uploadCard">
+      <div class="upload-zone" id="dropZone">
+        <input type="file" id="fileInput" accept=".pdf" hidden />
+        <div class="upload-icon-wrapper">
+          <div class="upload-icon-ring"></div>
+          <svg class="upload-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 44V20M32 20L22 30M32 20L42 30" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 48h32" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="upload-text">
+          <p class="upload-primary">Drag & Drop file PDF di sini</p>
+          <p class="upload-secondary">atau klik untuk pilih file</p>
+        </div>
+        <button class="btn-browse" id="browseBtn" type="button">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M4 16l3-3m0 0l6-6m-6 6l6 6M7 7l3-3m0 0l3 3M10 4v.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Pilih File PDF
+        </button>
+        <p class="upload-note">Maksimal 50MB · Format: PDF</p>
+      </div>
+
+      <!-- File selected state -->
+      <div class="file-selected" id="fileSelected" style="display:none;">
+        <div class="file-info">
+          <div class="file-icon">
+            <svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="8" fill="#ef4444" fill-opacity="0.1"/><path d="M13 8h9l9 9v15a2 2 0 01-2 2H13a2 2 0 01-2-2V10a2 2 0 012-2z" fill="#ef4444" fill-opacity="0.8"/><path d="M22 8l9 9h-7a2 2 0 01-2-2V8z" fill="#ef4444"/><text x="14" y="27" font-size="7" fill="white" font-weight="bold" font-family="Arial">PDF</text></svg>
+          </div>
+          <div class="file-details">
+            <p class="file-name" id="fileName">document.pdf</p>
+            <p class="file-size" id="fileSize">2.4 MB</p>
+          </div>
+          <button class="btn-remove" id="removeBtn" type="button" title="Hapus file">
+            <svg viewBox="0 0 20 20" fill="none"><path d="M6 6l8 8M14 6l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <button class="btn-convert" id="convertBtn" type="button">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M4 4v5h5M16 16v-5h-5M3.5 9A8 8 0 0116.5 9M16.5 11A8 8 0 013.5 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Konversi Sekarang
+        </button>
+      </div>
+    </div>
+
+    <!-- Progress State -->
+    <div class="progress-card" id="progressCard" style="display:none;">
+      <div class="progress-animation">
+        <div class="doc-transform">
+          <div class="doc doc-pdf">
+            <div class="doc-lines">
+              <div class="doc-line"></div>
+              <div class="doc-line short"></div>
+              <div class="doc-line"></div>
+              <div class="doc-line short"></div>
+            </div>
+            <span class="doc-label">PDF</span>
+          </div>
+          <div class="transform-arrow">
+            <div class="arrow-track">
+              <div class="arrow-head"></div>
+            </div>
+          </div>
+          <div class="doc doc-word">
+            <div class="doc-lines">
+              <div class="doc-line"></div>
+              <div class="doc-line short"></div>
+              <div class="doc-line"></div>
+              <div class="doc-line short"></div>
+            </div>
+            <span class="doc-label">WORD</span>
+          </div>
+        </div>
+      </div>
+      <h3 class="progress-title">Sedang Mengkonversi...</h3>
+      <p class="progress-subtitle" id="progressMsg">Menganalisis struktur PDF...</p>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar" id="progressBar" style="width:0%"></div>
+      </div>
+      <p class="progress-percent" id="progressPercent">0%</p>
+    </div>
+
+    <!-- Result State -->
+    <div class="result-card" id="resultCard" style="display:none;">
+      <div class="result-icon">
+        <div class="result-checkmark">
+          <svg viewBox="0 0 52 52" fill="none">
+            <circle cx="26" cy="26" r="25" stroke="#22c55e" stroke-width="2"/>
+            <path d="M14 26l8 8 16-16" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <h3 class="result-title">Konversi Berhasil! 🎉</h3>
+      <p class="result-subtitle" id="resultFileName">document.docx siap diunduh</p>
+      <div class="result-stats">
+        <div class="stat">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.5"/></svg>
+          Struktur terjaga
+        </div>
+        <div class="stat">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.5"/></svg>
+          Format asli
+        </div>
+        <div class="stat">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.5"/></svg>
+          Siap diedit
+        </div>
+      </div>
+      <button class="btn-download" id="downloadBtn" type="button">
+        <svg viewBox="0 0 20 20" fill="none"><path d="M3 17h14M10 3v10m0 0l-4-4m4 4l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Unduh File Word
+      </button>
+      <button class="btn-reset" id="resetBtn" type="button">Konversi File Lain</button>
+    </div>
+
+    <!-- Error State -->
+    <div class="error-card" id="errorCard" style="display:none;">
+      <div class="error-icon">
+        <svg viewBox="0 0 52 52" fill="none">
+          <circle cx="26" cy="26" r="25" stroke="#ef4444" stroke-width="2"/>
+          <path d="M26 15v12M26 33v2" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3 class="error-title">Konversi Gagal</h3>
+      <p class="error-msg" id="errorMsg">Terjadi kesalahan saat memproses file.</p>
+      <button class="btn-retry" id="retryBtn" type="button">Coba Lagi</button>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Keunggulan</span>
+        <h2 class="section-title">Kenapa Pilih PDF2Word?</h2>
+        <p class="section-subtitle">Teknologi konversi terdepan yang menjaga setiap elemen dokumen Anda</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon" style="--icon-color: #6366f1;">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zM14 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" stroke="currentColor" stroke-width="1.8"/></svg>
+          </div>
+          <h3>Struktur Terjaga</h3>
+          <p>Tabel, kolom, header, footer, dan paragraf tetap pada posisi aslinya persis seperti PDF</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="--icon-color: #f59e0b;">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 16M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Gambar Tersimpan</h3>
+          <p>Semua gambar, logo, dan grafik dalam PDF ikut terkonversi dan disimpan di dokumen Word</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="--icon-color: #22c55e;">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Privasi Terjamin</h3>
+          <p>File Anda diproses secara lokal. Tidak ada data yang dikirim ke server pihak ketiga</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="--icon-color: #ec4899;">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Super Cepat</h3>
+          <p>Algoritma konversi yang dioptimalkan memastikan file Anda siap dalam hitungan detik</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="--icon-color: #3b82f6;">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Format Lengkap</h3>
+          <p>Font, ukuran teks, warna, bold, italic, dan semua format teks dipertahankan</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="--icon-color: #14b8a6;">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>100% Gratis</h3>
+          <p>Tidak perlu berlangganan atau membuat akun. Langsung konversi tanpa batas</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Panduan</span>
+        <h2 class="section-title">Cara Menggunakan</h2>
+        <p class="section-subtitle">Hanya 3 langkah mudah untuk mengkonversi PDF Anda</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Upload PDF</h3>
+            <p>Drag & drop atau klik tombol untuk memilih file PDF dari komputer Anda (maks. 50MB)</p>
+          </div>
+        </div>
+        <div class="step-arrow">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Klik Konversi</h3>
+            <p>Tekan tombol "Konversi Sekarang" dan tunggu proses berlangsung secara otomatis</p>
+          </div>
+        </div>
+        <div class="step-arrow">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Unduh Word</h3>
+            <p>File .docx siap diunduh dan langsung bisa diedit di Microsoft Word atau Google Docs</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 36 36" fill="none">
+            <rect width="36" height="36" rx="10" fill="url(#logoGrad2)"/>
+            <path d="M10 8h10l8 8v12a2 2 0 01-2 2H10a2 2 0 01-2-2V10a2 2 0 012-2z" fill="white" fill-opacity="0.9"/>
+            <path d="M20 8l8 8h-6a2 2 0 01-2-2V8z" fill="white" fill-opacity="0.5"/>
+            <defs>
+              <linearGradient id="logoGrad2" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#6366f1"/>
+                <stop offset="1" stop-color="#8b5cf6"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="logo-text">PDF<span class="logo-accent">2</span>Word</span>
+      </div>
+      <p class="footer-copy">© 2026 PDF2Word · Dibuat dengan ❤️ · Privasi &amp; Keamanan Data Anda adalah Prioritas Kami</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
